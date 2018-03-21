@@ -1,0 +1,16 @@
+{
+    "manifest_version": 2,
+    "name": "pivotaltracker lable",
+    "version": "1.0.0",
+    "description": "pivotaltracker lable 着色",
+    "permissions": [
+        "*://www.pivotaltracker.com/*"
+     ],
+    "content_scripts": [
+        {
+            "matches": ["*://www.pivotaltracker.com/*"],
+            "run_at": "document_end",
+            "js": ["js/jquery-3.3.1.min.js","js/common_end.js"]
+        }
+    ]
+}
