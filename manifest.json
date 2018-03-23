@@ -6,6 +6,10 @@
     "permissions": [
         "*://www.pivotaltracker.com/*"
      ],
+     "browser_action": {
+        "default_title": "pivotaltracker lable setting",
+        "default_popup": "popup/popup.html"
+    },
     "content_scripts": [
         {
             "matches": ["*://www.pivotaltracker.com/*"],
