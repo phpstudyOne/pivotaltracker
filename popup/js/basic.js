@@ -1,5 +1,6 @@
 (()=>{
 
+<<<<<<< HEAD
     /**
      * show color value input change
      */
@@ -19,11 +20,17 @@
      */
     $('td').click(function(){
         var colorValue = $(this).attr('bgcolor');
-        if(colorValue == undefined){
-            return false;
-        }
-        $('#colorValue').val(colorValue);
-        $('#colorValue').change();
+    $('#colorValue').change(function(){
+        $('#showColor').css({"background-color":$(this).val()});
+        $('#showColor').val($('labelName').val());
+    });
+
+
+    if(colorValue == undefined){
+        return false;
+    }
+    $('#colorValue').val(colorValue);
+    $('#colorValue').change();
     })
 
     
