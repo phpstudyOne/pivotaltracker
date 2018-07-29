@@ -1,10 +1,14 @@
 <div class="showModal">
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Add Label
-</button>
-
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Add Label
+  </button>
+  <div id="showAllAddedLabel">
+  
+  </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -295,13 +299,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="saveSelect">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 <script src="../js/jquery-3.3.1.min.js" ></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/store.js"></script>
 <script src="./js/basic.js"></script>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="./css/basic.css" />
