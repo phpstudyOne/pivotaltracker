@@ -2,8 +2,18 @@
     width: 600px;
     height: 600px;
 }
-/* 
-#exampleModal{
-    width: 500px;
-    height: 700px;
- */
+
+li {
+    float: left;
+    list-style-type:none;
+}
+.LIlabelName {
+    width: 150px;
+    height: 20px;
+    background-color: aquamarine;
+    margin-right: 5px
+}
+.LIlabelNameRemove{
+    margin-right: 10px;
+    font-size: 19px
+}
