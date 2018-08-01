@@ -8,12 +8,13 @@ li {
     list-style-type:none;
 }
 .LIlabelName {
-    width: 150px;
+    width: 80px;
     height: 20px;
     background-color: aquamarine;
     margin-right: 5px
 }
 .LIlabelNameRemove{
     margin-right: 10px;
-    font-size: 19px
+    cursor: pointer;
+    /* font-size: 19px */
 }

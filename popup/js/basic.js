@@ -8,7 +8,9 @@
     }else{
         let showAllAddedLabelHTML = '';
         Object.keys(data.labelName).forEach(labelName=>{
-            showAllAddedLabelHTML += `<button type="button" class="btn btn-primary" style="color: ${data.labelName[labelName]}">${labelName}</button>`
+            showAllAddedLabelHTML +=`<li class="LIlabelName" style="background-color:${data.labelName[labelName]}">`
+            showAllAddedLabelHTML +=    `<span class="LIlabelNameRemove" data-labelName="${labelName}" data-colorValue="${data.labelName[labelName]}">X</span>${labelName}`
+            showAllAddedLabelHTML +=`</li>`
         });
         $('#showAllAddedLabel').html(showAllAddedLabelHTML);
     }
@@ -16,12 +18,12 @@
     /**
      * show color value input change
      */
-    $('#colorValue').change(function(){
+    $('body').on('change','#colorValue' ,function(){
         $('#showColor').css({"background-color":$(this).val()});
         $('#showColor').val($('#labelName').val());
     });
 
-    $('#labelName').change(function(){
+    $('body').on('change','#labelName' ,function(){
         var colorValue = $('#showColor').val();
         $('#showColor').css({"background-color":colorValue});
         $('#showColor').val($('#labelName').val());
@@ -30,7 +32,7 @@
     /**
      * select color 
      */
-    $('td').click(function(){
+    $('body').on('click','td' ,function(){
         var colorValue = $(this).attr('bgcolor');
         $('#colorValue').change(function(){
             $('#showColor').css({"background-color":$(this).val()});
@@ -45,18 +47,36 @@
         $('#colorValue').change();
     });
 
-    $('#saveSelect').click(()=>{
+    /**
+     * click remove label button
+     */
+    $('body').on('click','.LIlabelNameRemove',function(){
+        let labelName = $(this).attr('data-labelName');
+        let colorValue = $(this).attr('data-colorValue');
+        delete data.labelName[labelName];
+        delete data.colorValue[colorValue];
+        $(this).parent('.LIlabelName').remove();
+        store.set('data', data);
+        chrome.storage.local.set(data);
+    });
+
+    /**
+     * click save button
+     */
+    $('body').on('click','#saveSelect' ,()=>{
         let labelName = $('#labelName').val();
         let colorValue = $('#colorValue').val();
         if(!validation(labelName,colorValue)){
             return true;
         }
-
         data.labelName[labelName] = colorValue;
         data.colorValue[colorValue] = labelName;
         store.set('data', data);
         chrome.storage.local.set(data);
-        $('#showAllAddedLabel').append(`<button type="button" class="btn btn-primary" style="background-color: ${colorValue}">${labelName}</button>`);
+        let showAllAddedLabelHTML =`<li class="LIlabelName" style="background-color:${colorValue}">`
+        showAllAddedLabelHTML     +=    `<span class="LIlabelNameRemove" data-labelName="${labelName}" data-colorValue="${colorValue}">X</span>${labelName}`
+        showAllAddedLabelHTML     +=`</li>`
+        $('#showAllAddedLabel').append(showAllAddedLabelHTML);
     });
     
     const validation = (labelName,colorValue)=>{
