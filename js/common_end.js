@@ -1,6 +1,16 @@
 (()=>{
-    setInterval(function() {
-        $('a[data-cid=c925]').css({"font-size":"20px","color":'#ec3909'});
-        $('a[data-cid=c928]').css({"font-size":"20px","color":'#FF66FF'});
-      }, 3000)
+
+      setTimeout(hanld,5000);
+
+      $('body').click(()=>{
+        hanld();
+      })
+
+      function hanld(){
+        chrome.storage.local.get((data)=>{
+          data && Object.keys(data.labelName).forEach((labelName)=>{
+            $(`a:contains(${labelName})`) && $(`a:contains(${labelName})`).css({"font-size":"20px","color":`${data.labelName[labelName]}`});
+          }); 
+        });
+      }
 })()
