@@ -28,6 +28,40 @@
         $('#showColor').css({"background-color":colorValue});
         $('#showColor').val($('#labelName').val());
     });
+    const char16 = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f'];
+
+    const initSelectColorHtmlArr = () => {
+        let HTMLString = [];
+        for (let i = 0; i < 8; i++){
+            for (let j = 0; j < 8; j++){
+                for (let k = 0; k < 8; k++){
+                    HTMLString.push(`<td bgcolor="#${char16[i*2+1]}${char16[i*2+1]}${char16[j*2+1]}${char16[j*2+1]}${char16[k*2+1]}${char16[k*2+1]}"><img src="./images/spacer.gif" height="20" border="0" width="20"></a></td>`);
+                }
+            }
+        }
+        return HTMLString;
+    }
+
+    const initSelectColorHtmlString = () => {
+        let arr = initSelectColorHtmlArr();
+        let result = [];
+        for(let i=0, len = arr.length; i < len ; i+=32){
+            result.push(arr.slice(i,i+16));
+        }
+        let html = ''
+        result.forEach(arr => {
+            html += '<tr>';
+            arr.forEach(td => {
+                html += td;
+            });
+            html += '</tr>';
+        });
+        return html;
+    }
+
+    
+    $('#aaaaaaaaaaa').html(initSelectColorHtmlString());
+    
 
     /**
      * select color 
@@ -63,7 +97,9 @@
     /**
      * click save button
      */
-    $('body').on('click','#saveSelect' ,()=>{
+    $('body').on('click', '#saveSelect', () => {
+        // $('#aaaaaaaaaaa').htm(;
+
         let labelName = $('#labelName').val();
         let colorValue = $('#colorValue').val();
         if(!validation(labelName,colorValue)){
@@ -77,6 +113,7 @@
         showAllAddedLabelHTML     +=    `<span class="LIlabelNameRemove" data-labelName="${labelName}" data-colorValue="${colorValue}">X</span>${labelName}`
         showAllAddedLabelHTML     +=`</li>`
         $('#showAllAddedLabel').append(showAllAddedLabelHTML);
+        $('#exampleModal').modal('hide');
     });
     
     const validation = (labelName,colorValue)=>{
